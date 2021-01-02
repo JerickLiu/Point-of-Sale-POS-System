@@ -1,5 +1,5 @@
-# Point-of-Sale-POS-System
-## NOT INTENDED TO BE USED COMMERCIALLY ##
+## Point-of-Sale-POS-System
+# NOT INTENDED TO BE USED COMMERCIALLY #
 
 Rudimentary POS system coded purely in python with integrated cash register and inventory management.
 
