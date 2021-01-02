@@ -1,11 +1,11 @@
 ## Point of Sale POS System ##
 # NOT INTENDED TO BE USED COMMERCIALLY #
 
-Rudimentary POS system coded purely in python with integrated cash register and inventory management.
+Rudimentary POS system coded purely in python with integrated cash register and inventory management. Runs in console.
 
 Cash Register:
-   > Ability to add products to cart.\n
-   > Ability to checkout
+   > Ability to add products to cart.
+   > Ability to checkout.
 
 Inventory Management:
    > Ability to print product reports, restock, add, remove, modify, and apply discounts to products
