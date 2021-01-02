@@ -5,11 +5,14 @@ Rudimentary POS system coded purely in python with integrated cash register and 
 
 Cash Register:
    > Ability to add products to cart
+   .
    > Ability to checkout
 
 Inventory Management:
    > Ability to print product reports
+   .
    > Ability to restock
+   .
    > Ability to add, remove, modify, and apply discounts to products
   
 
