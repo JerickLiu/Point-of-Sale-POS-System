@@ -1,7 +1,17 @@
-## Point of Sale POS System ##
-# NOT INTENDED TO BE USED COMMERCIALLY #
+## POS System ##
 
-Rudimentary POS system coded purely in python with integrated cash register and inventory management. Runs in console.
+Grade 12 ICS4U Final Assignment (emphasis on Python classes lol). Era before AI tooling.
+
+Rudimentary POS system coded in python with integrated cash register and inventory management. Runs in terminal.
+
+## Setup
+
+Python 3.6+
+```bash
+python3 main.py
+```
+
+## Features
 
 Cash Register:
    > Ability to add products to cart.
