@@ -11,7 +11,7 @@ from FileManager import FileManager as File
 from Functions import Functions
 
 # Constants
-STORE_NAME = 'Jerick\'s Store'
+STORE_NAME = 'Store Name'
 
 
 class Main:

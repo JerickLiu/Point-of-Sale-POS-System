@@ -402,8 +402,8 @@ class Payment:
 
 class Receipt(Transaction, Shopping):
 
-	STORE_NAME = 'Jerick\'s Store'
-	CASHIER = 'Jerick'
+	STORE_NAME = 'Store Name'
+	CASHIER = 'Name'
 
 	def getReceiptString(self, listOfPayments, change = None):
     # Obtains a string containing an itemized reciept of all items in cart
