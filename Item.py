@@ -5,7 +5,6 @@ from FindProduct import FindProduct
 TAXRATE = 0.13
 
 class Item:
-
 	# Holds information representing an item in the store
 
 	def __init__(self, sku, name, quantity, price):
@@ -15,23 +14,27 @@ class Item:
 		self.price = price
 
 		return
-	# end __init__
+	# end __init__ method
 	
 	def __str__(self):
+		# Prints a formatted view of an Item object. Shows name, sku, price, and quantity.
+
 		price = f'{self.price:.2f}'
 
 		return (f"\n\n{f'Product {self.sku}:':>20}\t{self.name}\n\n{'Price:':>20}\t${price:>5}\n{'Quantity:':>20}\t{self.quantity}")
-	# end __str__
+	# end __str__ method
+# end Item class
 
-
+ 
 class Shopping(Item):
+	# Holds methods allowing user to shop products
 
 	def __init__(self, listOfItems):
 		self.listOfItems = listOfItems
 		self.cart = {}
 
 		return
-	# end __init__
+	# end __init__ method
 
 	def cashRegisterMenu(self):
 		# Central Cash Register
@@ -58,7 +61,7 @@ class Shopping(Item):
 			# User chooses checkout
 			elif userChoice == '2':
 				
-				# Creates Transaction object and calls method takePayment method
+				# Creates Transaction object and calls takePayment method
 				Transaction(self.listOfItems, self.cart).takePayment()
 				
 				# Variable equates to cart when transaction is completed to confirm quantity has been taken
@@ -71,12 +74,12 @@ class Shopping(Item):
 			elif userChoice == '3':
 
 				doneShopping = Functions.confirmSelection('\n\nBack to Main Menu (You will lose your cart if you proceed)\n', 'Cash Register')
-
+			# end if
 
 		return checkedOut
+	# end cashRegisterMenu method
 	
-	# end cashRegisterMenu methods
-	
+
 	def getUserProduct(self):
 		# Obtains the user requested product to purchase
 		# Parameters: self (instance)
@@ -101,12 +104,14 @@ class Shopping(Item):
 					# User inputs another SKU is denied
 
 					SKU = Functions.loopTillValid('\nEnter the SKU or Name of the item:\t', 'any', 'Adding to Cart')
+				# end if
 
 			else:
 				# Else occurs if user input is not a product in productList
 				FindProduct.searchError()
 
 				SKU = Functions.loopTillValid('\nEnter the SKU or Name of the item:\t', 'any', 'Adding to Cart')
+			# end if
 			
 		# Variable equates to the SKU of the item requested
 		SKU = self.listOfItems[FindProduct.productIndex(self.listOfItems, SKU)].sku
@@ -140,7 +145,6 @@ class Shopping(Item):
 				# Boolean turns false
 				available = False
 			# End if
-
 		# End if
 
 		return available
@@ -167,7 +171,6 @@ class Shopping(Item):
 						stockConfirm = Functions.confirmSelection(stockPurchase, 'Cash Register')
 
 				else:
-
 						# Else calls errorStockMessage
 						self.errorStockMessage(SKU)
 
@@ -182,7 +185,7 @@ class Shopping(Item):
 		self.cartReview(stockPurchase, SKU)
 
 		return
-	# End shopping function
+	# End shopping method
 
 
 	def addToCart(self, SKU, stockPurchase):
@@ -203,7 +206,8 @@ class Shopping(Item):
 		# End try
 
 		return 
-	# End addToCart function
+	# End addToCart method
+
 
 	def errorStockMessage(self, SKU):
 			# Prints an error message if the stock user entered exceeds the stock available
@@ -218,12 +222,12 @@ class Shopping(Item):
 					print('\nUh oh, there isn\'t enough stock for that!')
 			
 			return
-	# End errorStockMessage function
+	# End errorStockMessage method
 
 
 	def cartReview(self, stockPurchase, SKU):
 			# Prints the formatted cart and successful stock purchase message
-			# Parameters: productList (2d list), cart (dictionary), stockPurchase (int), index (int), userProduct (int)
+			# Parameters: self (instance), stockPurchase (int), SKU (str)
 			# Return: Null
 
 			Functions.clearScreen('YOUR CART\n')
@@ -233,8 +237,6 @@ class Shopping(Item):
 
 					# Prints formatted product for viewer visability
 					print(f'\t{productQty:>3} x {self.listOfItems[FindProduct.productIndex(self.listOfItems, SKU)].name:<10}')
-
-					# End if
 			# End for
 
 			# Prints successful stock purchase message
@@ -243,12 +245,12 @@ class Shopping(Item):
 			Functions.enterToContinue()
 
 			return
-	# End cartReview function
+	# End cartReview method
+# end Shopping class
 
 
 class Transaction(Shopping):
-
-	# Holds a list of item objects.
+	# Holds a list of item objects and methods to complete purchase
 
 	def __init__(self, listOfItems, cart):
 		
@@ -256,13 +258,13 @@ class Transaction(Shopping):
 		self.cart = cart
 
 		return
-	# end __init__
+	# end __init__ method
 
 
 	def computeSubtotal(self):
 		# Computes subtotal of cart by multiplying price of object by quantity
 		# Parameters: self (instance)
-		# Return: subtotal ()
+		# Return: subtotal (float)
 		subtotal = 0
 
 		for SKU, productQty in self.cart.items():
@@ -273,17 +275,16 @@ class Transaction(Shopping):
 	# end computeSubtotal method
 	
 
-	@staticmethod
-	def computeTax(subtotal):
+	def computeTax(self, subtotal):
 		# Computes tax on subtotal
 		# Parameters: subtotal (float)
 		# Return: tax on purchase (float)
 
 		return float(subtotal) * TAXRATE
 	# end computeTax method
+
 	
-	@staticmethod
-	def computeTotal(subtotal, tax):
+	def computeTotal(self, subtotal, tax):
 		# Computes Total by adding subtotal and tax
 		# Parameters: subtotal (float), tax (float)
 		# Return: total on purchase (float)
@@ -299,6 +300,7 @@ class Transaction(Shopping):
 
 		# Calls computeTax method to determine tax
 		tax = self.computeTax(self.computeSubtotal())
+
 		# Calls computeTotal method to determine total
 		total = round(self.computeTotal(self.computeSubtotal(), tax), 2)
 
@@ -323,7 +325,6 @@ class Transaction(Shopping):
 				# paid variable increments by amount
 				paid += paymentType.amount
 			
-			
 			else:
 				# Else occurs if user overpaid bill with credit (illegal)
 				#   > Payment not recorded and user prompted to re-enter payment 
@@ -332,8 +333,18 @@ class Transaction(Shopping):
 
 				Functions.enterToContinue()
 			# end if
-
 		# end while
+
+		# Calls needsChange method
+		self.needsChange(listOfPayments, paid, total)
+
+		return
+	# end takePayment method
+
+	def needsChange(self, listOfPayments, paid, total):
+		# Determines if the Transaction features change and prints Receipt accordingly
+		# Parameters: self (instance), listOfPayments (list), paid (float), total (float)
+		# Return: Null
 
 		# If statement checks if change is required for the transaction
 		if paid > total:
@@ -353,9 +364,9 @@ class Transaction(Shopping):
 
 			Functions.enterToContinue()
 		# end if
-		
-	# end takePayment method
 
+		return
+	# end needsChange method
 #end Transaction class
 
 				
@@ -372,19 +383,20 @@ class PaymentType:
 			self.paymentType = 'Credit Card'
 		
 		return
-	# end __init__
-
+	# end __init__ method
 # end PaymentType Class
 
 
 class Payment:
+
+	# Holds payment type and amount
+
 	def __init__(self, paymentType, amount):
 		self.paymentType = PaymentType(paymentType).paymentType
 		self.amount = float(amount)
 
 		return
-	# end __init__
-
+	# end __init__ method
 # end Payment Class
 
 
@@ -394,15 +406,15 @@ class Receipt(Transaction, Shopping):
 	CASHIER = 'Jerick'
 
 	def getReceiptString(self, listOfPayments, change = None):
-    # Prints an itemized reciept of all items in cart
-    # Parameters: productList (2d list), cart (dictionary), name (str), cashierName (str)
+    # Obtains a string containing an itemized reciept of all items in cart
+    # Parameters: self (instance), listOfPayments (list), change (float)
     # Returns: Null
 
 		Functions.clearScreen()
 
 		line = '–' * 60
 
-		# Output initiated as top of receipt (constant)
+		# Output initiated as top of receipt
 		output = (f'{Receipt.STORE_NAME:^65}\n{f"Cashier: {Receipt.CASHIER}":^65}\n{"ITEMIZED RECIEPT":^65}\n\n\t{"QTY":>2}\t\t{"PRODUCT"}\t\t\t\t\t\t\t\t\t{"PRICE"}\n\t{line}\n')
 	
 		# For statement iterates through unpacked user cart
@@ -445,14 +457,13 @@ class Receipt(Transaction, Shopping):
 		output += f'\n\n{f"Thank you for shopping at {Receipt.STORE_NAME}!":^70}\n\n'
 
 		return output
-		# End reciept function
+	# End getReceiptString method
 	
-	@staticmethod
 	def totalsReceiptSpacing(spacing, text):
 		# Determines receipt spacing
 		# Parameters: spacing (int), text (str)
 		# Return: proper spacing (str)
-		space = ' '
 
-		return space * (spacing - len(text))
+		return ' ' * (spacing - len(text))
 	# end totalsReceiptSpacing method
+# end Reciept class

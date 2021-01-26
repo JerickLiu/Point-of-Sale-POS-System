@@ -1,13 +1,11 @@
 from Functions import Functions
 
-
 class FindProduct:
-
 	# Contains methods to find object in list 
 
 	def checkIfProductExists(productList, productSearch):
-		# Obtains the index of the requested object in productList( Only ran if checkIfProductExists method validates parameter prior)
-		# Parameters: self (instance), productSearch (str)
+		# Checks if the search parameter matches an element in a list
+		# Parameters: productList (list), productSearch (str)
 		# Returns: productIndex (int)
 
 		productExists = False
@@ -19,7 +17,6 @@ class FindProduct:
 			if product.name.upper() == productSearch.upper() or product.sku == productSearch.upper():
 				productExists = True
 			# end if
-
 		# end for
 		
 		return productExists
@@ -27,7 +24,7 @@ class FindProduct:
 
 	def productIndex(productList, productSearch):
 		# Obtains the index of the requested object in productList( Only ran if checkIfProductExists method validates parameter prior)
-		# Parameters: self (instance), productSearch (str)
+		# Parameters: productList (list), productSearch (str)
 		# Returns: productIndex (int)
 
 		# For statment iterates through an enumerated productList
@@ -37,7 +34,6 @@ class FindProduct:
 			if product.name.upper() == productSearch.upper() or product.sku == productSearch.upper():
 				productIndex = index
 			# end if
-
 		# end for
 		
 		return productIndex
@@ -55,3 +51,4 @@ class FindProduct:
 
 		return
 	# end searchError method
+# end FindProduct class

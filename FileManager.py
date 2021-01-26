@@ -12,31 +12,35 @@ class FileManager:
 
 		# Initiates empty productList
 		productList = []
-		
+    
+		try:
 		# Opens inventory.txt for reading
-		with open('inventory.txt', 'r') as invFile:
+			with open('inventory.txt', 'r') as invFile:
 
-			for line in invFile:
+				for line in invFile:
 
-					# Splits and Unpacks info from inventory.txt into variables
-					# Info: self, sku, name, category, quantity, minQuantity, vendorPrice, markUpPercent, salePercent
-					sku, name, category, quantity, minQuantity, vendorPrice, markUpPercent, regPrice, salePercent, currentPrice = line.replace('\n', '').split(',')
+						# Splits and Unpacks info from inventory.txt into variables
+						# Info: self, sku, name, category, quantity, minQuantity, vendorPrice, markUpPercent, salePercent
+						sku, name, category, quantity, minQuantity, vendorPrice, markUpPercent, regPrice, salePercent, currentPrice = line.replace('\n', '').split(',')
 
-				
-					# Creates an Inventory object
-					inventoryEntry = Inventory(sku, name, category, quantity, minQuantity, vendorPrice, markUpPercent, salePercent)
+						# Creates an Inventory object
+						inventoryEntry = Inventory(sku, name, category, quantity, minQuantity, vendorPrice, markUpPercent, salePercent)
 
-					# Appends the Inventory object into productList
-					productList.append(inventoryEntry)
-			# end for
+						# Appends the Inventory object into productList
+						productList.append(inventoryEntry)
+				# end for
+			# end with
+		
+		except FileNotFoundError:
+			# Except occurs if the file is missing / named incorrectly
 
-		# end with
+			productList = None
+		# end try
 
 		return productList
 	# end obtainProducts method
 	
 	
-
 	def txtFormat(product):
 		# Converts Inventory object into proper format for txt
 		# Parameters: product (Inventory object)
@@ -74,5 +78,7 @@ class FileManager:
 				# end for
 			# end with
 		# end with
+
+		return
 	# end updateFiles method
-# end FileManger class
+# end FileManager class

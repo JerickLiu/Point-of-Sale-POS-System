@@ -209,3 +209,4 @@ class Functions:
 
 		return
 	# End enterToContinue function
+# end Functions class

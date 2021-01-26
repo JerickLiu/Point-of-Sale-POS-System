@@ -10,7 +10,7 @@ class Menu:
 
 		return
 	
-	# end __init__
+	# End __init__ method
 
 	
 	def menu(self):
@@ -25,7 +25,6 @@ class Menu:
 
 			# Prints each element in the tuple enumerated by one
 			print(f'{num + 1}: {choice}')
-
 		# End for
 
 		print('\nPlease select an option:', end=' ')
@@ -51,3 +50,4 @@ class Menu:
 
 		return userInput
 	# End getOption function
+# End Menu class
