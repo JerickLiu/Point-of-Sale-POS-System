@@ -1,6 +1,6 @@
 ## POS System ##
 
-Grade 12 ICS4U Final Assignment (emphasis on Python classes lol). Era before AI tooling.
+Grade 12 ICS4U Final Assignment (emphasis on Python classes lol). Era before AI tooling takes over the world?
 
 Rudimentary POS system coded in python with integrated cash register and inventory management. Runs in terminal.
 
